@@ -1,4 +1,3 @@
-
 struct Point {
 	ll x, y;
 	bool operator==(const Point& rhs) const {
@@ -48,7 +47,7 @@ bool segment_intersect(Line p, Line q) {
 	return ab <= 0 && cd <= 0;
 }
 
-int ccw(pt a, pt b, pt c) {
+int ccw(Point a, Point b, Point c) {
 	ll t = 1LL * a.x * (b.y - c.y) + 1LL * b.x * (c.y - a.y) + 1LL * c.x * (a.y - b.y);
 	return t ? (t > 0 ? 1 : -1) : 0;
 }
@@ -66,15 +65,15 @@ vector<Point> convex_hull(vector<Point>& v) {
 }
 
 const int INF = 1000000000;
-bool point_in_polygon(vector<Point>& poly, pt k) {
-	pt temp = make_pair(k.x + 1, INF);
+bool point_in_polygon(vector<Point>& poly, Point k) {
+	Point temp = { k.x + 1, INF };
 	int s = 0;
 	for (int i = 0; i < poly.size(); i++)
 		if (segment_intersect({ poly[i], poly[(i + 1) % poly.size()] }, { k, temp })) s++;
 	return s % 2;
 }
 
-pt read_pt() {
+Point read_Point() {
 	ll t1, t2;
 	cin >> t1 >> t2; Point t;
 	return t = { t1,t2 };
